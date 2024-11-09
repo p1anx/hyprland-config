@@ -1,0 +1,28 @@
+backend = "full"
+color_space = "lch"
+palette = "dark"
+
+[templates]
+cava.template = 'colors-cava'
+cava.target = '~/.config/cava/config'
+
+hypr.template = 'colors-hypr.conf'
+hypr.target = '~/.config/hypr/themes/wallust.conf'
+
+macchina.template = 'colors-macchina.toml'
+macchina.target = '~/.config/macchina/themes/wallust.toml'
+
+rofi.template = 'colors-rofi.rasi'
+rofi.target = '~/.config/rofi/colors.rasi'
+
+swaync.template = 'colors-swaync.css'
+swaync.target = '~/.config/swaync/themes/wallust/colors-wallust.css'
+
+waybar.template = 'colors-waybar.css'
+waybar.target = '~/.config/waybar/wallust.css'
+
+wezterm.template = 'colors-wezterm.toml'
+wezterm.target = '~/.config/wezterm/colors/wallust.toml'
+
+zathura.template = 'colors-zathura'
+zathura.target = '~/.config/zathura/zathurarc'
