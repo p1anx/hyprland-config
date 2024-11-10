@@ -11,6 +11,7 @@
     "exclusive": true,
     "gtk-layer-shell": true,
     "margin-bottom": -1,
+    "ipc": true,
     "passthrough": false,
     "height": 41,
     "modules-left": [
@@ -20,6 +21,7 @@
     ],
     "modules-center": [],
     "modules-right": [
+        "custom/swaync",
         "tray",
         "cpu",
         "temperature",

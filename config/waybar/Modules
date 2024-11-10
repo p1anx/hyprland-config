@@ -110,7 +110,7 @@
 "clock": {
 	"interval": 1,
     //"format": " {:%I:%M %p}", // AM PM format
-    "format": " {:%H:%M:%S}", // 24H
+    "format": "  {:%H:%M}", // 24H
 	"format-alt": " {:%H:%M   %Y, %d %B, %A}",
 	"tooltip-format": "<tt><small>{calendar}</small></tt>",
 	"calendar": {
@@ -173,13 +173,13 @@
 	//"format": "󰋊",
 	"path": "/",
 	//"format-alt-click": "click",
-	"format": "{percentage_used}% 󰋊",
+	"format": "{percentage_used}% 󰋊 ",
 	//"tooltip": true,
 	"tooltip-format": "{used} used out of {total} on {path} ({percentage_used}%)",
 },
 "hyprland/language": {
-	"format": "Lang: {}",
-	"format-en": "US",
+	"format": "{}",
+	"format-en": "EN",
 	"format-tr": "Korea",
 	"keyboard-name": "at-translated-set-2-keyboard",
 	"on-click": "hyprctl switchxkblayout $SET_KB next"
@@ -225,7 +225,7 @@
 },
 "memory": {
 	"interval": 10,
-	"format": "{used:0.1f}G 󰾆",
+	"format": "{used:0.1f}G 󰾆 ",
 	"format-alt": "{percentage}% 󰾆",
 	"format-alt-click": "click",
 	"tooltip": true,
@@ -264,7 +264,7 @@
 "network": {
 	"format": "{ifname}",
 	"format-wifi": "{icon}",
-	"format-ethernet": "󰌘",
+	"format-ethernet": "  ",
 	"format-disconnected": "󰌙",
 	"tooltip-format": "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}",
 	"format-linked": "󰈁 {ifname} (No IP)",
@@ -363,7 +363,7 @@
 },
 "tray": {
 	"icon-size": 20,
-	"spacing": 4,
+	"spacing": 8,
 },
 "wireplumber": {
 	"format": "{icon} {volume} %",
@@ -377,8 +377,8 @@
 	],
 },
 "wlr/taskbar": {
-	"format": "{icon} {name}",
-	"icon-size": 16,
+	"format": "{icon}",
+	"icon-size": 20,
 	"all-outputs": false,
 	"tooltip-format": "{title}",
 	"on-click": "activate",
