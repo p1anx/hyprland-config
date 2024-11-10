@@ -11,9 +11,6 @@ res_choice=1 #1 <=1080p 2 >=1440p
 #read -p "${CAT} Do you want to disable Rainbow Borders animation? (Y/N): " border_choice
 border_choice=n #y disalbe rainbow border; n enable
 
-
-
-
 clear
 wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified
 waybar_style="$HOME/.config/waybar/style/[Dark] Latte-Wallust combined.css"
@@ -22,8 +19,8 @@ waybar_config_laptop="$HOME/.config/waybar/configs/[TOP] Default Laptop_v4"
 
 # Check if running as root. If root, script will exit
 if [[ $EUID -eq 0 ]]; then
-    echo "This script should not be executed as root! Exiting......."
-    exit 1
+  echo "This script should not be executed as root! Exiting......."
+  exit 1
 fi
 
 printf "\n%.0s" {1..2}
@@ -46,12 +43,12 @@ RESET=$(tput sgr0)
 
 # Create Directory for Copy Logs
 if [ ! -d Copy-Logs ]; then
-    mkdir Copy-Logs
+  mkdir Copy-Logs
 fi
 
 # Function to print colorful text
 print_color() {
-    printf "%b%s%b\n" "$1" "$2" "$CLEAR"
+  printf "%b%s%b\n" "$1" "$2" "$CLEAR"
 }
 
 # Set the name of the log file to include the current date and time
@@ -90,39 +87,36 @@ if hostnamectl | grep -q 'Operating System: NixOS'; then
 fi
 
 # Check if dpkg is installed (use to check if Debian or Ubuntu or based distros
-if command -v dpkg &> /dev/null; then
-	echo "Debian/Ubuntu based distro. Disabling pyprland" 2>&1 | tee -a "$LOG" || true
+if command -v dpkg &>/dev/null; then
+  echo "Debian/Ubuntu based distro. Disabling pyprland" 2>&1 | tee -a "$LOG" || true
   # disabling pyprland as causing issues
   sed -i '/^exec-once = pypr &/ s/^/#/' config/hypr/UserConfigs/Startup_Apps.conf
 fi
-
 
 printf "\n"
 
 # Check if asusctl is installed and add rog-control-center on Startup
 if command -v asusctl >/dev/null 2>&1; then
-    sed -i '/exec-once = rog-control-center &/s/^#//' config/hypr/UserConfigs/Startup_Apps.conf
+  sed -i '/exec-once = rog-control-center &/s/^#//' config/hypr/UserConfigs/Startup_Apps.conf
 fi
 
 printf "\n"
-
-
 
 # Action to do for better rofi and kitty appearance
 while true; do
 
   case $res_choice in
-    1)
-        resolution="≤ 1080p"
-        break
-        ;;
-    2)
-        resolution="≥ 1440p"
-        break
-        ;;
-    *)
-        echo "${ERROR} Invalid choice. Please enter 1 for ≤ 1080p or 2 for ≥ 1440p."
-        ;;
+  1)
+    resolution="≤ 1080p"
+    break
+    ;;
+  2)
+    resolution="≥ 1440p"
+    break
+    ;;
+  *)
+    echo "${ERROR} Invalid choice. Please enter 1 for ≤ 1080p or 2 for ≥ 1440p."
+    ;;
   esac
 done
 
@@ -144,20 +138,19 @@ fi
 
 printf "\n"
 
-
 # Check if the user wants to disable Rainbow borders
 printf "${ORANGE} By default, Rainbow Borders animation is enabled.\n"
 printf "${WARN} - However, this uses a bit more CPU and Memory resources.\n"
 
 if [[ "$border_choice" =~ ^[Yy]$ ]]; then
-    mv config/hypr/UserScripts/RainbowBorders.sh config/hypr/UserScripts/RainbowBorders.bak.sh
+  mv config/hypr/UserScripts/RainbowBorders.sh config/hypr/UserScripts/RainbowBorders.bak.sh
 
-    sed -i '/exec-once = \$UserScripts\/RainbowBorders.sh \&/s/^/#/' config/hypr/UserConfigs/Startup_Apps.conf
-    sed -i '/  animation = borderangle, 1, 180, liner, loop/s/^/#/' config/hypr/UserConfigs/UserDecorAnimations.conf
+  sed -i '/exec-once = \$UserScripts\/RainbowBorders.sh \&/s/^/#/' config/hypr/UserConfigs/Startup_Apps.conf
+  sed -i '/  animation = borderangle, 1, 180, liner, loop/s/^/#/' config/hypr/UserConfigs/UserDecorAnimations.conf
 
-    echo "${OK} Rainbow borders is now disabled." 2>&1 | tee -a "$LOG"
+  echo "${OK} Rainbow borders is now disabled." 2>&1 | tee -a "$LOG"
 else
-    echo "${NOTE} No changes made. Rainbow borders remain enabled." 2>&1 | tee -a "$LOG"
+  echo "${NOTE} No changes made. Rainbow borders remain enabled." 2>&1 | tee -a "$LOG"
 fi
 printf "\n"
 
@@ -170,72 +163,6 @@ get_backup_dirname() {
   timestamp=$(date +"%m%d_%H%M")
   echo "back-up_${timestamp}"
 }
-
-printf "${INFO} - copying dotfiles ${BLUE}first${RESET} part\n"
-# Config directories which will ask the user whether to replace or not
-DIRS="
-  ags
-  fastfetch
-  kitty
-  rofi
-  swaync
-  waybar
-"
-for DIR2 in $DIRS; do
-  DIRPATH=~/.config/"$DIR2"
-
-  if [ -d "$DIRPATH" ]; then
-    while true; do
-      #read -p "${CAT} ${ORANGE}$DIR2${RESET} config found in ~/.config/ Do you want to replace ${ORANGE}$DIR2${RESET} config? (Y/N): " DIR1_CHOICE
-
-      DIR1_CHOICE=y
-      case "$DIR1_CHOICE" in
-        [Yy]* )
-          BACKUP_DIR=$(get_backup_dirname)
-          echo -e "${NOTE} - Config for ${YELLOW}$DIR2${RESET} found, attempting to back up."
-
-          mv "$DIRPATH" "$DIRPATH-backup-$BACKUP_DIR" 2>&1 | tee -a "$LOG"
-          if [ $? -eq 0 ]; then
-            echo -e "${NOTE} - Backed up $DIR2 to $DIRPATH-backup-$BACKUP_DIR." 2>&1 | tee -a "$LOG"
-
-            cp -r config/"$DIR2" ~/.config/"$DIR2"
-            if [ $? -eq 0 ]; then
-              echo -e "${OK} - Replaced $DIR2 with new configuration." 2>&1 | tee -a "$LOG"
-            else
-              echo "${ERROR} - Failed to copy $DIR2." 2>&1 | tee -a "$LOG"
-              exit 1
-            fi
-          else
-            echo "${ERROR} - Failed to back up $DIR2." 2>&1 | tee -a "$LOG"
-            exit 1
-          fi
-          break
-          ;;
-        [Nn]* )
-          # Skip the directory
-          echo -e "${NOTE} - Skipping ${ORANGE}$DIR2${RESET} " 2>&1 | tee -a "$LOG"
-          break
-          ;;
-        * )
-          echo -e "${WARN} - Invalid choice. Please enter Y or N."
-          ;;
-      esac
-    done
-  else
-    # Copy new config if directory does not exist
-    cp -r config/"$DIR2" ~/.config/"$DIR2" 2>&1 | tee -a "$LOG"
-    if [ $? -eq 0 ]; then
-      echo "${OK} - Copy completed for ${YELLOW}$DIR2${RESET}" 2>&1 | tee -a "$LOG"
-    else
-      echo "${ERROR} - Failed to copy ${YELLOW}$DIR2${RESET}" 2>&1 | tee -a "$LOG"
-      exit 1
-    fi
-  fi
-done
-
-printf "\n%.0s" {1..1}
-
-printf "${INFO} - Copying dotfiles ${BLUE}second${RESET} part\n"
 
 # Check if the config directory exists
 if [ ! -d "config" ]; then
@@ -253,6 +180,12 @@ DIR="
   swappy
   wallust
   wlogout
+  ags
+  fastfetch
+  kitty
+  rofi
+  swaync
+  waybar
 "
 
 for DIR_NAME in $DIR; do
@@ -298,61 +231,14 @@ if [ ! -d "config" ]; then
   exit 1
 fi
 
-#DIRH="hypr"
-#FILES_TO_RESTORE=(
-  #"Monitors.conf"
-  #"Laptops.conf"
-  #"UserKeybinds.conf"
-#)
-
-#DIRPATH=~/.config/"$DIRH"
-## Backup the existing directory if it exists
-#if [ -d "$DIRPATH" ]; then
-  #echo -e "${NOTE} - Config for $DIRH found, attempting to back up."
-  #BACKUP_DIR=$(get_backup_dirname)
-
-  #mv "$DIRPATH" "$DIRPATH-backup-$BACKUP_DIR" 2>&1 | tee -a "$LOG"
-  #if [ $? -eq 0 ]; then
-    #echo -e "${NOTE} - Backed up $DIRH to $DIRPATH-backup-$BACKUP_DIR."
-  #else
-    #echo "${ERROR} - Failed to back up ${ORANGE}$DIRH${RESET}."
-    #exit 1
-  #fi
-#fi
-
-## Copy the new config
-#if [ -d "config/$DIRH" ]; then
-  #cp -r "config/$DIRH" "$DIRPATH" 2>&1 | tee -a "$LOG"
-  #if [ $? -eq 0 ]; then
-    #echo "${OK} - Copy of config for ${ORANGE}$DIRH${RESET} completed!"
-
-    ## Loop through files to check and offer restoration
-    #for FILE_NAME in "${FILES_TO_RESTORE[@]}"; do
-      #BACKUP_FILE="$DIRPATH-backup-$BACKUP_DIR/UserConfigs/$FILE_NAME"
-      #if [ -f "$BACKUP_FILE" ]; then
-        #printf "\n${INFO} Found ${YELLOW}$FILE_NAME${RESET} in hypr backup...\n"
-        #read -p "${CAT} Do you want to restore ${ORANGE}$FILE_NAME${RESET} from backup? (y/n): " file_restore
-        #if [[ "$file_restore" == [Yy]* ]]; then
-          #cp "$BACKUP_FILE" "$DIRPATH/UserConfigs/$FILE_NAME" && echo "${OK} - $FILE_NAME restored!" 2>&1 | tee -a "$LOG"
-        #else
-          #echo "${NOTE} - Skipped restoring $FILE_NAME."
-        #fi
-      #fi
-    #done
-  #else
-    #echo "${ERROR} - Failed to copy $DIRH."
-    #exit 1
-  #fi
-#else
-  #echo "${ERROR} - Directory config/$DIRH does not exist to copy."
-  #exit 1
-#fi
-
 printf "\n%.0s" {1..2}
 
 # copying Wallpapers
 mkdir -p ~/Pictures/wallpapers
-cp -r wallpapers ~/Pictures/ && { echo "${OK} some wallpapers compied!"; } || { echo "${ERROR} Failed to copy some wallpapers."; exit 1; } 2>&1 | tee -a "$LOG"
+cp -r wallpapers ~/Pictures/ && { echo "${OK} some wallpapers compied!"; } || {
+  echo "${ERROR} Failed to copy some wallpapers."
+  exit 1
+} 2>&1 | tee -a "$LOG"
 
 # Set some files as executable
 chmod +x ~/.config/hypr/scripts/* 2>&1 | tee -a "$LOG"
@@ -362,23 +248,23 @@ chmod +x ~/.config/hypr/initial-boot.sh 2>&1 | tee -a "$LOG"
 
 # Detect machine type and set waybar configurations accordingly
 if hostnamectl | grep -q 'Chassis: desktop'; then
-    # Configurations for a desktop
-    ln -sf "$waybar_config" "$HOME/.config/waybar/config" 2>&1 | tee -a "$LOG"
-    # Remove waybar configs for laptop
-    rm -rf "$HOME/.config/waybar/configs/[TOP] Default Laptop" \
-           "$HOME/.config/waybar/configs/[BOT] Default Laptop" \
-           "$HOME/.config/waybar/configs/[TOP] Default Laptop_v2" \
-           "$HOME/.config/waybar/configs/[TOP] Default Laptop_v3" \
-           "$HOME/.config/waybar/configs/[TOP] Default Laptop_v4" 2>&1 | tee -a "$LOG" || true
+  # Configurations for a desktop
+  ln -sf "$waybar_config" "$HOME/.config/waybar/config" 2>&1 | tee -a "$LOG"
+  # Remove waybar configs for laptop
+  rm -rf "$HOME/.config/waybar/configs/[TOP] Default Laptop" \
+    "$HOME/.config/waybar/configs/[BOT] Default Laptop" \
+    "$HOME/.config/waybar/configs/[TOP] Default Laptop_v2" \
+    "$HOME/.config/waybar/configs/[TOP] Default Laptop_v3" \
+    "$HOME/.config/waybar/configs/[TOP] Default Laptop_v4" 2>&1 | tee -a "$LOG" || true
 else
-    # Configurations for a laptop or any system other than desktop
-    ln -sf "$waybar_config_laptop" "$HOME/.config/waybar/config" 2>&1 | tee -a "$LOG"
-    # Remove waybar configs for desktop
-    rm -rf "$HOME/.config/waybar/configs/[TOP] Default" \
-           "$HOME/.config/waybar/configs/[BOT] Default" \
-           "$HOME/.config/waybar/configs/[TOP] Default_v2" \
-           "$HOME/.config/waybar/configs/[TOP] Default_v3" \
-           "$HOME/.config/waybar/configs/[TOP] Default_v4" 2>&1 | tee -a "$LOG" || true
+  # Configurations for a laptop or any system other than desktop
+  ln -sf "$waybar_config_laptop" "$HOME/.config/waybar/config" 2>&1 | tee -a "$LOG"
+  # Remove waybar configs for desktop
+  rm -rf "$HOME/.config/waybar/configs/[TOP] Default" \
+    "$HOME/.config/waybar/configs/[BOT] Default" \
+    "$HOME/.config/waybar/configs/[TOP] Default_v2" \
+    "$HOME/.config/waybar/configs/[TOP] Default_v3" \
+    "$HOME/.config/waybar/configs/[TOP] Default_v4" 2>&1 | tee -a "$LOG" || true
 fi
 
 # additional wallpapers
@@ -386,38 +272,38 @@ echo "$(tput setaf 6) By default only a few wallpapers are copied...$(tput sgr0)
 printf "\n"
 
 #while true; do
-  #read -rp "${CAT} Would you like to download additional wallpapers? ${WARN} This is more than >700mb (y/n)" WALL
-  #case $WALL in
-    #[Yy])
-      #echo "${NOTE} Downloading additional wallpapers..."
-      #if git clone "https://github.com/JaKooLit/Wallpaper-Bank.git"; then
-          #echo "${OK} Wallpapers downloaded successfully." 2>&1 | tee -a "$LOG"
+#read -rp "${CAT} Would you like to download additional wallpapers? ${WARN} This is more than >700mb (y/n)" WALL
+#case $WALL in
+#[Yy])
+#echo "${NOTE} Downloading additional wallpapers..."
+#if git clone "https://github.com/JaKooLit/Wallpaper-Bank.git"; then
+#echo "${OK} Wallpapers downloaded successfully." 2>&1 | tee -a "$LOG"
 
-          ## Check if wallpapers directory exists and create it if not
-          #if [ ! -d ~/Pictures/wallpapers ]; then
-              #mkdir -p ~/Pictures/wallpapers
-              #echo "${OK} Created wallpapers directory." 2>&1 | tee -a "$LOG"
-          #fi
+## Check if wallpapers directory exists and create it if not
+#if [ ! -d ~/Pictures/wallpapers ]; then
+#mkdir -p ~/Pictures/wallpapers
+#echo "${OK} Created wallpapers directory." 2>&1 | tee -a "$LOG"
+#fi
 
-          #if cp -R Wallpaper-Bank/wallpapers/* ~/Pictures/wallpapers/ >> "$LOG" 2>&1; then
-              #echo "${OK} Wallpapers copied successfully." 2>&1 | tee -a "$LOG"
-              #rm -rf Wallpaper-Bank 2>&1 # Remove cloned repository after copying wallpapers
-              #break
-          #else
-              #echo "${ERROR} Copying wallpapers failed" 2>&1 | tee -a "$LOG"
-          #fi
-      #else
-          #echo "${ERROR} Downloading additional wallpapers failed" 2>&1 | tee -a "$LOG"
-      #fi
-      #;;
-  #[Nn])
-      #echo "${NOTE} You chose not to download additional wallpapers." 2>&1 | tee -a "$LOG"
-      #break
-      #;;
-  #*)
-      #echo "Please enter 'y' or 'n' to proceed."
-      #;;
-  #esac
+#if cp -R Wallpaper-Bank/wallpapers/* ~/Pictures/wallpapers/ >> "$LOG" 2>&1; then
+#echo "${OK} Wallpapers copied successfully." 2>&1 | tee -a "$LOG"
+#rm -rf Wallpaper-Bank 2>&1 # Remove cloned repository after copying wallpapers
+#break
+#else
+#echo "${ERROR} Copying wallpapers failed" 2>&1 | tee -a "$LOG"
+#fi
+#else
+#echo "${ERROR} Downloading additional wallpapers failed" 2>&1 | tee -a "$LOG"
+#fi
+#;;
+#[Nn])
+#echo "${NOTE} You chose not to download additional wallpapers." 2>&1 | tee -a "$LOG"
+#break
+#;;
+#*)
+#echo "Please enter 'y' or 'n' to proceed."
+#;;
+#esac
 #done
 
 # CLeaning up of ~/.config/ backups
@@ -439,7 +325,7 @@ cleanup_backups() {
 
       # If more than one backup found
       if [ ${#BACKUP_DIRS[@]} -gt 1 ]; then
-		printf "\n\n ${INFO} Performing clean up for ${ORANGE}${DIR##*/}${RESET}\n"
+        printf "\n\n ${INFO} Performing clean up for ${ORANGE}${DIR##*/}${RESET}\n"
 
         echo -e "${NOTE} Found multiple backups for: ${ORANGE}${DIR##*/}${RESET}"
         echo "${YELLOW}Backups: ${RESET}"
@@ -476,9 +362,8 @@ cleanup_backups() {
 cleanup_backups
 
 # symlinks for waybar style
-ln -sf "$waybar_style" "$HOME/.config/waybar/style.css" && \
-
-printf "\n%.0s" {1..2}
+ln -sf "$waybar_style" "$HOME/.config/waybar/style.css" &&
+  printf "\n%.0s" {1..2}
 
 # initialize wallust to avoid config error on hyprland
 wallust run -s $wallpaper 2>&1 | tee -a "$LOG"
