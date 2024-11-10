@@ -1,6 +1,6 @@
 {
 "include": [
-  "$HOME/.config/waybar/myModules",
+  "$HOME/.config/waybar/Modules",
   "$HOME/.config/waybar/ModulesWorkspaces",
   "$HOME/.config/waybar/ModulesCustom",
   "$HOME/.config/waybar/ModulesGroups",
