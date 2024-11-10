@@ -17,7 +17,7 @@ rofi_config="$HOME/.config/rofi/config-waybar-layout.rasi"
 # Function to display menu options
 menu() {
     options=()
-    target="wallust"  # 要去除的文件名
+    target={"wallust"}  # 要去除的文件名
     while IFS= read -r dir; do
         basename_folder=$(basename "$dir")
         if [[ "$basename_folder" != "$target" ]]; then
@@ -33,13 +33,12 @@ menu() {
 apply_config() {
     ln -sf "$waybar_configs/$1/config" "$waybar_config"
     #restart_waybar_if_needed
-    "${SCRIPTSDIR}/Refresh.sh" &
+    # "${SCRIPTSDIR}/Refresh.sh" &
 }
 
 # Apply selected style
 apply_style() {
     ln -sf "$waybar_styles/$1/style.css" "$waybar_style"
-    "${SCRIPTSDIR}/Refresh.sh" &
 }
 # Main function
 main() {
@@ -57,6 +56,7 @@ main() {
         *)
             apply_config "$choice"
             apply_style "$choice"
+            "${SCRIPTSDIR}/Refresh.sh" &
             ;;
     esac
 }
