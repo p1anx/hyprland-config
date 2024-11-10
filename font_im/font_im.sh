@@ -22,6 +22,8 @@ export LANGUAGE=zh_CN:en_US
 EOF
   if grep -q "arch" /etc/os-release; then
     sudo pacman -S noto-fonts-cjk --noconfirm
+    #nerd font
+    sudo pacman -S ttf-firacode-nerd ttf-jetbrains-mono-nerd ttf-mononoki-nerd --noconfirm
   fi
 
 }
