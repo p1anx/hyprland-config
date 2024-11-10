@@ -5,7 +5,7 @@
 
 /* ---- Configuration ---- */
 configuration {
-	font: "Fira Code SemiBold 12";
+	font: "Fira Code Nerd Font 12";
 }
 
 /* ---- Window ---- */

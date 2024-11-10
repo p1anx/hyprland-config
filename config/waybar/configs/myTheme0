@@ -1,0 +1,35 @@
+{
+"include": [
+  "$HOME/.config/waybar/myModules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  ],
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "gtk-layer-shell": true,
+    "margin-bottom": -1,
+    "passthrough": false,
+    "height": 41,
+    "modules-left": [
+        "custom/os_button",
+        "hyprland/workspaces",
+        "wlr/taskbar"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "tray",
+        "cpu",
+        "temperature",
+        "memory",
+        "disk",
+        "pulseaudio",
+        "network",
+        "battery",
+        "hyprland/language",
+        "clock",
+        "custom/power",
+    ],
+}
