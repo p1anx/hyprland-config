@@ -1,6 +1,9 @@
 #!/bin/bash
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
+if [ $1 -eq "-i" ]; then
+  source install.sh
+fi
 #echo "$ORANGE Select monitor resolution for better config appearance and fonts:"
 #echo "$YELLOW 1. Equal to or less than 1080p (≤ 1080p)"
 #echo "$YELLOW 2. Equal to or higher than 1440p (≥ 1440p)"
