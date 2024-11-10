@@ -7,8 +7,8 @@ edit=${EDITOR:-nvim}
 tty=kitty
 
 # Paths to configuration directories
-configs="$HOME/.config
-UserConfigs="$HOME/.config
+configs="$HOME/.config"
+UserConfigs="$HOME/.config"
 
 # Function to display the menu options
 menu() {
