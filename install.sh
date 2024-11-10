@@ -15,9 +15,10 @@ function install() {
   nvim
   tmux
 
-  sudo pacman -S --noconfirm neovim waybar rofi-wayland wallust fzf wlogout tmux dunst swaync swww zsh
+  sudo pacman -S --noconfirm neovim waybar rofi-wayland wallust fzf wlogout tmux dunst swaync swww zsh thunar
 
 }
+install
 # sudo pacman -S --noconfirm neovim
 # sudo pacman -S --noconfirm neovim
 # sudo pacman -S --noconfirm neovim
