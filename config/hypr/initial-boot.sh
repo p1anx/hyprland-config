@@ -11,6 +11,7 @@
 scriptsDir=$HOME/.config/hypr/scripts
 wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified
 waybar_style="$HOME/.config/waybar/theme0/style.css"
+waybar_config="$HOME/.config/waybar/theme0/config"
 # waybar_style="$HOME/.config/waybar/style/myTheme0.css"
 kvantum_theme="Catppuccin-Mocha"
 color_scheme="prefer-dark"
@@ -48,7 +49,8 @@ if [ ! -f ~/.config/hypr/.initial_startup_done ]; then
 
     # Initial waybar style
 	if [ -f "$waybar_style" ]; then
-    	ln -sf "$waybar_style" "$HOME/.config/waybar/style.css"
+	   	ln -sf "$waybar_style" "$HOME/.config/waybar/style.css"
+	   	ln -sf "$waybar_config" "$HOME/.config/waybar/config"
 
 		# Refreshing waybar, swaync, rofi etc. 
 		"$scriptsDir/Refresh.sh" > /dev/null 2>&1 & 

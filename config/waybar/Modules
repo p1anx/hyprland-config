@@ -364,8 +364,8 @@
 	"scroll-step": 5,
 },
 "tray": {
-	"icon-size": 22,
-	"spacing": 10,
+	"icon-size": 20,
+	"spacing": 8,
 },
 "wireplumber": {
 	"format": "{icon} {volume} %",
