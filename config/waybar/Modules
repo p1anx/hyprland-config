@@ -265,7 +265,7 @@
 "network": {
   "interval": 10,
 	"format": "{ifname}",
-	"format-wifi": "{icon}",
+	"format-wifi": "{icon} ",
 	"format-ethernet": " ",
 	"format-disconnected": "󰌙",
 	"tooltip-format": "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}",
