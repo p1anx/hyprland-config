@@ -23,7 +23,6 @@
       
     ],
     "modules-right": [
-        "custom/swaync",
         "tray",
         "temperature",
         "cpu",
@@ -32,7 +31,7 @@
         "pulseaudio#1",
         "network",
         "battery",
-        "hyprland/language",
+        "custom/swaync",
         "custom/power",
     ],
 }

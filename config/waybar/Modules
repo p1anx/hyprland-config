@@ -159,7 +159,7 @@
 },
 "cpu": {
 	"interval": 10,
-	"format": "󰍛 {usage}%",
+	"format": " 󰍛 {usage}%",
 	"min-length": 5,
 	"format-alt-click": "click",
 	"format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛",
@@ -364,8 +364,8 @@
 	"scroll-step": 5,
 },
 "tray": {
-	"icon-size": 20,
-	"spacing": 8,
+	"icon-size": 22,
+	"spacing": 10,
 },
 "wireplumber": {
 	"format": "{icon} {volume} %",
