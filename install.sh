@@ -15,8 +15,8 @@ function install() {
   nvim
   tmux
 
-  sudo pacman -S --noconfirm neovim waybar rofi-wayland wallust fzf wlogout tmux dunst swaync swww zsh thunar
-
+  sudo pacman -S --noconfirm neovim waybar rofi-wayland wallust fzf wlogout tmux dunst swaync swww zsh nautilus
+  yay -S --noconfirm humanity-icon-theme yaru-icon-theme hicolor-icon-theme
 }
 install
 # sudo pacman -S --noconfirm neovim
