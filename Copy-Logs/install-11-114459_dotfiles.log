@@ -1,0 +1,18 @@
+[32m[OK](B[m You have chosen ≤ 1080p resolution.
+[33m[NOTE](B[m No changes made. Rainbow borders remain enabled.
+mv: cannot overwrite '/home/sheer/.config/btop-backup-back-up_1111_1144/btop': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/cava-backup-back-up_1111_1144/cava': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/hypr-backup-back-up_1111_1144/hypr': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/Kvantum-backup-back-up_1111_1144/Kvantum': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/qt5ct-backup-back-up_1111_1144/qt5ct': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/qt6ct-backup-back-up_1111_1144/qt6ct': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/swappy-backup-back-up_1111_1144/swappy': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/wallust-backup-back-up_1111_1144/wallust': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/wlogout-backup-back-up_1111_1144/wlogout': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/ags-backup-back-up_1111_1144/ags': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/fastfetch-backup-back-up_1111_1144/fastfetch': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/kitty-backup-back-up_1111_1144/kitty': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/rofi-backup-back-up_1111_1144/rofi': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/swaync-backup-back-up_1111_1144/swaync': Directory not empty
+mv: cannot overwrite '/home/sheer/.config/waybar-backup-back-up_1111_1144/waybar': Directory not empty
+Error: No such file or directory (os error 2)

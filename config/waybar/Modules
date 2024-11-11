@@ -14,7 +14,7 @@
 	//"thermal-zone": 0,
 	"critical-threshold": 82,
 	"format-critical": "{temperatureC}°C {icon}",
-	"format": "{temperatureC}°C {icon}",
+	"format": "{icon} {temperatureC}°C",
 	"format-icons": [
 		"󰈸"
 	],
@@ -158,8 +158,8 @@
 	"format-alt": "{:%A, %d %B, %Y (%R)}"
 },
 "cpu": {
-	"format": "{usage}% 󰍛",
-	"interval": 1,
+	"interval": 10,
+	"format": "󰍛 {usage}%",
 	"min-length": 5,
 	"format-alt-click": "click",
 	"format-alt": "{icon0}{icon1}{icon2}{icon3} {usage:>2}% 󰍛",
@@ -173,13 +173,14 @@
 	//"format": "󰋊",
 	"path": "/",
 	//"format-alt-click": "click",
-	"format": "{percentage_used}% 󰋊 ",
+	"format": "󰋊 {percentage_used}%",
 	//"tooltip": true,
 	"tooltip-format": "{used} used out of {total} on {path} ({percentage_used}%)",
 },
 "hyprland/language": {
+  "interval":10,
 	"format": "{}",
-	"format-en": "EN",
+	"format-en": "en",
 	"format-tr": "Korea",
 	"keyboard-name": "at-translated-set-2-keyboard",
 	"on-click": "hyprctl switchxkblayout $SET_KB next"
@@ -225,8 +226,8 @@
 },
 "memory": {
 	"interval": 10,
-	"format": "{used:0.1f}G 󰾆 ",
-	"format-alt": "{percentage}% 󰾆",
+	"format": "󰾆 {used:0.1f}G",
+	"format-alt": "󰾆 {percentage}%",
 	"format-alt-click": "click",
 	"tooltip": true,
 	"tooltip-format": "{used:0.1f}GB/{total:0.1f}G",
@@ -262,9 +263,10 @@
 	"max-length": 30,
 },
 "network": {
+  "interval": 10,
 	"format": "{ifname}",
 	"format-wifi": "{icon}",
-	"format-ethernet": "  ",
+	"format-ethernet": " ",
 	"format-disconnected": "󰌙",
 	"tooltip-format": "{ipaddr}  {bandwidthUpBits}  {bandwidthDownBits}",
 	"format-linked": "󰈁 {ifname} (No IP)",
@@ -333,7 +335,7 @@
 },
 "pulseaudio#1": {
   "format": "{icon} {volume}%",
-  "format-bluetooth": "{icon} {volume}%",
+  "format-bluetooth": " {volume}%",
   "format-bluetooth-muted": " {icon}",
   "format-muted": "󰸈",
   "format-icons": {
@@ -348,7 +350,7 @@
   "on-click": "pamixer --toggle-mute",
   "on-click-right": "pavucontrol -t 3",
   "tooltip": true,
-  "tooltip-format": "{icon} {desc} | {volume}%",
+  "tooltip-format": " {desc} | {volume}%",
 },
 "pulseaudio#microphone": {
 	"format": "{format_source}",

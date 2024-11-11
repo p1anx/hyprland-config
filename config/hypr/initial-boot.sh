@@ -10,7 +10,7 @@
 # Variables
 scriptsDir=$HOME/.config/hypr/scripts
 wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified
-waybar_style="$HOME/.config/waybar/theme0//style.css"
+waybar_style="$HOME/.config/waybar/theme0/style.css"
 # waybar_style="$HOME/.config/waybar/style/myTheme0.css"
 kvantum_theme="Catppuccin-Mocha"
 color_scheme="prefer-dark"

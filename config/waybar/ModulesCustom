@@ -195,4 +195,9 @@
 	"interval": "once",
 	"tooltip": false
 },
+    "custom/os_button": {
+        "format": "",
+        "on-click": "rofi -show drun",
+        "tooltip": false
+    },
 }
