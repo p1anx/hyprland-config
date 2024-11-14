@@ -46,7 +46,6 @@ https://github.com/JaKooLit/Hyprland-Dots/assets/85185940/50d53755-0f11-45d6-991
 - [`Link`](https://github.com/JaKooLit/Hyprland-Dots/wiki/Videos_and_Reviews)
 
 </details>
-## install
 
 ## Installation 
 ### 👁️‍🗨️ My Hyprland install Scripts 👁️‍🗨️
